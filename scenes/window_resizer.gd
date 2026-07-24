@@ -5,18 +5,18 @@ const MINIMUM_SIZE := Vector2(81, 81);
 
 enum WINDOW_BOUNDARY_TYPE { TOP_LEFT, };
 
-var initalRect := Rect2()
-var cornerDragged : String;
+var inital_rect := Rect2()
+var corner_dragged : String;
 
-var dragOffset := Vector2.ZERO;
-var initalMousePos := Vector2.ZERO;
+var drag_offset := Vector2.ZERO;
+var inital_mouse_pos := Vector2.ZERO;
 
-func calculateCornerClicked(mousePos: Vector2) -> String:
+func calculate_corner_clicked(mouse_pos: Vector2) -> String:
 	var rect = get_global_rect();
-	var left = mousePos.x < rect.position.x + BORDER_WIDTH;
-	var right = mousePos.x > rect.end.x - BORDER_WIDTH;
-	var top = mousePos.y < rect.position.y + BORDER_WIDTH;
-	var bottom = mousePos.y > rect.end.y - BORDER_WIDTH;
+	var left = mouse_pos.x < rect.position.x + BORDER_WIDTH;
+	var right = mouse_pos.x > rect.end.x - BORDER_WIDTH;
+	var top = mouse_pos.y < rect.position.y + BORDER_WIDTH;
+	var bottom = mouse_pos.y > rect.end.y - BORDER_WIDTH;
 	
 	if left and top: return "top left";
 	if left and bottom: return "bottom left";
@@ -29,30 +29,30 @@ func calculateCornerClicked(mousePos: Vector2) -> String:
 	return "";
 
 func _input(event) -> void:
-	var mousePos = get_global_mouse_position()
+	var mouse_pos = get_global_mouse_position()
 	
 	# Find the corner currently being dragged on click down
 	if Input.is_action_just_pressed("LeftMouseButton"):
-		var edge = calculateCornerClicked(mousePos);
+		var edge = calculate_corner_clicked(mouse_pos);
 		if edge != "":
-			cornerDragged = edge;
-			initalMousePos = mousePos;
-			initalRect = get_global_rect();
-			dragOffset = get_screen_position() - mousePos;
+			corner_dragged = edge;
+			inital_mouse_pos = mouse_pos;
+			inital_rect = get_global_rect();
+			drag_offset = get_screen_position() - mouse_pos;
 	
 	# Move when click is down
-	if Input.is_action_pressed("LeftMouseButton") and cornerDragged != "":
-		var mouseDelta = mousePos - initalMousePos;
+	if Input.is_action_pressed("LeftMouseButton") and corner_dragged != "":
+		var mouseDelta = mouse_pos - inital_mouse_pos;
 		
-		var newPos = initalRect.position;
-		var newSize = initalRect.size;
+		var new_pos = inital_rect.position;
+		var new_size = inital_rect.size;
 		
-		if cornerDragged == "top":
-			newPos = mousePos + dragOffset;
+		if corner_dragged == "top":
+			new_pos = mouse_pos + drag_offset;
 			
-		set_global_position(newPos);
-		set_size(newSize);
+		set_global_position(new_pos);
+		set_size(new_size);
 	
 	# Reset variable when click is up
 	if Input.is_action_just_released("LeftMouseButton"):
-		cornerDragged = "";
+		corner_dragged = "";
