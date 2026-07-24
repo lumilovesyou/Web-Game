@@ -7,7 +7,7 @@
    viewBox="0 0 1000.0001 1000"
    version="1.1"
    id="svg1"
-   sodipodi:docname="window_example.svg"
+   sodipodi:docname="window_base.svg"
    inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="1"
      inkscape:deskcolor="#505050"
      inkscape:document-units="px"
-     inkscape:zoom="0.82447074"
-     inkscape:cx="398.43743"
-     inkscape:cy="303.83128"
+     inkscape:zoom="1.6757519"
+     inkscape:cx="665.07457"
+     inkscape:cy="154.85586"
      inkscape:window-width="1898"
      inkscape:window-height="1158"
      inkscape:window-x="0"
@@ -91,7 +91,8 @@
      x="-997.06122"
      y="-55.86293"
      inkscape:label="border-top"
-     transform="scale(-1)" />
+     transform="scale(-1)"
+     sodipodi:insensitive="true" />
   <rect
      style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:3.645;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      id="rect19"
@@ -110,100 +111,4 @@
      y="979.20807"
      inkscape:label="corner-bottom-left"
      sodipodi:insensitive="true" />
-  <g
-     id="g5"
-     inkscape:label="button-close"
-     transform="translate(935.15512,5.1396723)"
-     sodipodi:insensitive="true">
-    <rect
-       style="fill:#ff0000;fill-opacity:0.517647;stroke-width:1.24716"
-       id="rect3"
-       width="24.943001"
-       height="24.943148"
-       x="23.679831"
-       y="11.553736"
-       inkscape:label="button-close-rect" />
-    <g
-       id="g4"
-       transform="translate(-2.2458048,-1.6798821)"
-       inkscape:label="button-close-cross">
-      <rect
-         style="fill:#000000;fill-opacity:1;stroke-width:1.62351"
-         id="rect4-9"
-         width="18.147339"
-         height="3.9000323"
-         x="36.253521"
-         y="-10.924576"
-         transform="rotate(45)"
-         inkscape:label="button-close-cross-left-to-right" />
-      <rect
-         style="display:inline;fill:#000000;fill-opacity:1;stroke-width:1.62351"
-         id="rect4"
-         width="18.147339"
-         height="3.9000323"
-         x="-18.048229"
-         y="-47.277206"
-         transform="rotate(135)"
-         inkscape:label="button-close-cross-right-to-left" />
-    </g>
-  </g>
-  <g
-     id="g5-4-9"
-     inkscape:label="button-maximize"
-     transform="translate(906.80992,5.1396723)"
-     sodipodi:insensitive="true">
-    <rect
-       style="fill:#00ff00;fill-opacity:0.603922;stroke-width:1.24716"
-       id="rect3-3-5"
-       width="24.943001"
-       height="24.943148"
-       x="23.679831"
-       y="11.553736"
-       inkscape:label="button-maximize-rect" />
-    <g
-       id="g14"
-       inkscape:label="button-maximize-window"
-       transform="matrix(0.73170977,0,0,0.7480366,9.6136025,5.8811031)">
-      <rect
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect5"
-         width="19.301453"
-         height="17.500944"
-         x="26.617239"
-         y="15.53189"
-         inkscape:label="button-maximize-window-body" />
-      <rect
-         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.44865;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect14"
-         width="19.813929"
-         height="4.012589"
-         x="26.380722"
-         y="15.203038"
-         inkscape:label="button-maximize-window-top" />
-    </g>
-  </g>
-  <g
-     id="g5-4"
-     inkscape:label="button-minimize"
-     transform="translate(878.12116,5.1396723)"
-     style="display:inline"
-     sodipodi:insensitive="true">
-    <rect
-       style="fill:#ffff00;fill-opacity:0.604039;stroke-width:1.24716"
-       id="rect3-3"
-       width="24.943001"
-       height="24.943148"
-       x="23.679831"
-       y="11.553736"
-       inkscape:label="button-minimize-rect" />
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke-width:1.45227"
-       id="rect4-2"
-       width="16.232962"
-       height="3.4886801"
-       x="-44.267811"
-       y="-25.76965"
-       transform="scale(-1)"
-       inkscape:label="button-minimize-dash" />
-  </g>
 </svg>
