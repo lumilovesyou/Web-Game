@@ -49,46 +49,35 @@ func _input(event: InputEvent) -> void:
 		
 		match active_boundary:
 			WINDOW_BOUNDARY_TYPE.TOP_LEFT:
-				var potential_width := inital_rect.size.x - mouse_delta.x
-				var potential_height := inital_rect.size.y - mouse_delta.y
+				new_size.x = max(MINIMUM_SIZE.x, inital_rect.size.x - mouse_delta.x)
+				new_pos.x = inital_rect.end.x - new_size.x
+				new_size.y = max(MINIMUM_SIZE.y, inital_rect.size.y - mouse_delta.y)
+				new_pos.y = inital_rect.end.y - new_size.y
 				
-				if potential_width >= MINIMUM_SIZE.x:
-					new_pos.x = inital_rect.position.x + mouse_delta.x
-					new_size.x = potential_width
-				
-				if potential_height >= MINIMUM_SIZE.y:
-					new_pos.y = inital_rect.position.y + mouse_delta.y
-					new_size.y = potential_height
-					
 			WINDOW_BOUNDARY_TYPE.BOTTOM_LEFT:
-				var potential_width := inital_rect.size.x - mouse_delta.x				
-				if potential_width >= MINIMUM_SIZE.x:
-					new_pos.x = inital_rect.position.x + mouse_delta.x
-					new_size.x = potential_width
-				
+				new_size.x = max(MINIMUM_SIZE.x, inital_rect.size.x - mouse_delta.x)
+				new_pos.x = inital_rect.end.x - new_size.x
 				new_size.y = max(MINIMUM_SIZE.y, inital_rect.size.y + mouse_delta.y)
-			WINDOW_BOUNDARY_TYPE.TOP_RIGHT:
-				var potential_height := inital_rect.size.y - mouse_delta.y
-				if potential_height >= MINIMUM_SIZE.y:
-					new_pos.y = inital_rect.position.y + mouse_delta.y
-					new_size.y = potential_height
 				
+			WINDOW_BOUNDARY_TYPE.TOP_RIGHT:
 				new_size.x = max(MINIMUM_SIZE.x, inital_rect.size.x + mouse_delta.x)
+				new_size.y = max(MINIMUM_SIZE.y, inital_rect.size.y - mouse_delta.y)
+				new_pos.y = inital_rect.end.y - new_size.y
+				
 			WINDOW_BOUNDARY_TYPE.BOTTOM_RIGHT:
 				new_size.x = max(MINIMUM_SIZE.x, inital_rect.size.x + mouse_delta.x)
 				new_size.y = max(MINIMUM_SIZE.y, inital_rect.size.y + mouse_delta.y)
 				
 			WINDOW_BOUNDARY_TYPE.LEFT:
-				var potential_width = inital_rect.size.x - mouse_delta.x
-				if potential_width >= MINIMUM_SIZE.x:
-					new_pos.x = inital_rect.position.x + mouse_delta.x
-					new_size.x = potential_width
+				new_size.x = max(MINIMUM_SIZE.x, inital_rect.size.x - mouse_delta.x)
+				new_pos.x = inital_rect.end.x - new_size.x
 					
 			WINDOW_BOUNDARY_TYPE.RIGHT:
 				new_size.x = max(MINIMUM_SIZE.x, inital_rect.size.x + mouse_delta.x)
 				
 			WINDOW_BOUNDARY_TYPE.TOP:
 				new_pos = mouse_pos + drag_offset
+			
 			WINDOW_BOUNDARY_TYPE.BOTTOM:
 				new_size.y = max(MINIMUM_SIZE.y, inital_rect.size.y + mouse_delta.y)
 			
