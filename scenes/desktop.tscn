@@ -1,3 +1,26 @@
 [gd_scene format=3 uid="uid://dvbwjuxd2h36t"]
 
+[ext_resource type="Texture2D" uid="uid://dnumphdieyq8f" path="res://assets/images/test.png" id="1_xxa2h"]
+[ext_resource type="Script" uid="uid://vovh5i5p6th7" path="res://scenes/window_resizer.gd" id="2_7gre8"]
+
 [node name="Node2D" type="Node2D" unique_id=168027259]
+
+[node name="Window" type="Control" parent="." unique_id=316070280]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Window" unique_id=1080707161]
+layout_mode = 0
+offset_right = 71.0
+offset_bottom = 65.0
+texture = ExtResource("1_xxa2h")
+region_rect = Rect2(0, 0, 81, 81)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource("2_7gre8")
