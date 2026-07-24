@@ -1,9 +1,10 @@
 extends NinePatchRect
 
-const BORDER_WIDTH := 15
+const BORDER_WIDTH := 10
 const MINIMUM_SIZE := Vector2(81, 81)
 
 enum WINDOW_BOUNDARY {
+	NONE,
 	TOP_LEFT,
 	BOTTOM_LEFT,
 	TOP_RIGHT,
@@ -11,12 +12,11 @@ enum WINDOW_BOUNDARY {
 	LEFT,
 	RIGHT,
 	TOP,
-	BOTTOM,
-	NONE
+	BOTTOM
 }
 
 var inital_rect := Rect2()
-var active_boundary : WINDOW_BOUNDARY
+var active_boundary := WINDOW_BOUNDARY.NONE
 
 var drag_offset := Vector2.ZERO
 var inital_mouse_pos := Vector2.ZERO
@@ -50,6 +50,8 @@ func manage_cursor(mouse_pos: Vector2, rect: Rect2) -> void:
 			Input.set_default_cursor_shape(Input.CURSOR_HSIZE)
 		WINDOW_BOUNDARY.TOP, WINDOW_BOUNDARY.BOTTOM:
 			Input.set_default_cursor_shape(Input.CURSOR_VSIZE)
+		WINDOW_BOUNDARY.NONE:
+			Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 func _process(delta: float) -> void:
 	var mouse_pos := get_global_mouse_position()

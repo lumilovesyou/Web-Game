@@ -1,21 +1,21 @@
 [gd_scene format=3 uid="uid://dvbwjuxd2h36t"]
 
-[ext_resource type="Texture2D" uid="uid://dnumphdieyq8f" path="res://assets/images/test.png" id="1_xxa2h"]
-[ext_resource type="Script" uid="uid://vovh5i5p6th7" path="res://scenes/window_resizer.gd" id="2_7gre8"]
+[ext_resource type="PackedScene" uid="uid://kvivbgf10ww2" path="res://scenes/window_base.tscn" id="1_7gre8"]
+[ext_resource type="Script" uid="uid://dyptxlsvvafjo" path="res://scenes/window_manager.gd" id="1_xxa2h"]
 
-[node name="Node2D" type="Node2D" unique_id=168027259]
+[node name="Window Base" type="Node2D" unique_id=168027259]
 
-[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1080707161]
-offset_left = 94.0
-offset_top = 46.0
-offset_right = 165.0
-offset_bottom = 111.0
-texture = ExtResource("1_xxa2h")
-region_rect = Rect2(0, 0, 81, 81)
-patch_margin_left = 9
-patch_margin_top = 9
-patch_margin_right = 9
-patch_margin_bottom = 9
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-script = ExtResource("2_7gre8")
+[node name="Control" parent="." unique_id=1599758058 instance=ExtResource("1_7gre8")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 269.99997
+offset_top = 163.99998
+offset_right = 351.19995
+offset_bottom = 245.19998
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(2.5, 2.5)
+
+[node name="WindowManager" type="Node" parent="." unique_id=1104030813]
+script = ExtResource("1_xxa2h")
