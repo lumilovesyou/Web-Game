@@ -1,8 +1,15 @@
 extends NinePatchRect
 
 const BORDER_WIDTH := 15;
+const MINIMUM_SIZE := Vector2(81, 81);
+
+enum WINDOW_BOUNDARY_TYPE { TOP_LEFT, };
+
+var initalRect := Rect2()
 var cornerDragged : String;
+
 var dragOffset := Vector2.ZERO;
+var initalMousePos := Vector2.ZERO;
 
 func calculateCornerClicked(mousePos: Vector2) -> String:
 	var rect = get_global_rect();
@@ -22,17 +29,29 @@ func calculateCornerClicked(mousePos: Vector2) -> String:
 	return "";
 
 func _input(event) -> void:
+	var mousePos = get_global_mouse_position()
+	
 	# Find the corner currently being dragged on click down
 	if Input.is_action_just_pressed("LeftMouseButton"):
-		var edge = calculateCornerClicked(get_global_mouse_position());
+		var edge = calculateCornerClicked(mousePos);
 		if edge != "":
 			cornerDragged = edge;
-			dragOffset = get_screen_position() - get_global_mouse_position();
+			initalMousePos = mousePos;
+			initalRect = get_global_rect();
+			dragOffset = get_screen_position() - mousePos;
 	
 	# Move when click is down
-	if Input.is_action_pressed("LeftMouseButton"):
+	if Input.is_action_pressed("LeftMouseButton") and cornerDragged != "":
+		var mouseDelta = mousePos - initalMousePos;
+		
+		var newPos = initalRect.position;
+		var newSize = initalRect.size;
+		
 		if cornerDragged == "top":
-			set_position(get_global_mouse_position() + dragOffset)
+			newPos = mousePos + dragOffset;
+			
+		set_global_position(newPos);
+		set_size(newSize);
 	
 	# Reset variable when click is up
 	if Input.is_action_just_released("LeftMouseButton"):
