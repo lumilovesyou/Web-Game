@@ -5,16 +5,11 @@
 
 [node name="Node2D" type="Node2D" unique_id=168027259]
 
-[node name="Window" type="Control" parent="." unique_id=316070280]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Window" unique_id=1080707161]
-layout_mode = 0
-offset_right = 71.0
-offset_bottom = 65.0
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1080707161]
+offset_left = 94.0
+offset_top = 46.0
+offset_right = 165.0
+offset_bottom = 111.0
 texture = ExtResource("1_xxa2h")
 region_rect = Rect2(0, 0, 81, 81)
 patch_margin_left = 9
