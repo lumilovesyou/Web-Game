@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+display_server/driver.linuxbsd="x11"
 
 [dotnet]
 
@@ -26,7 +27,7 @@ project/assembly_name="Web Game"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotTogether/plugin.cfg", "res://addons/godot_super-wakatime/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 
