@@ -5,8 +5,10 @@ wM = WindowManager()
 init_window(800, 800, "Wow")
 set_target_fps(60)
 
-wM.addWindow((0,0), (20, 0), RED)
+wM.addWindow((20,20), (20, 50), RED)
 wM.addWindow((100,50), (100,80), GREEN)
+wM.addWindow((100,50), (100,80), YELLOW)
+wM.addWindow((100,50), (100,80), BLUE)
 
 while not window_should_close():
     begin_drawing()
