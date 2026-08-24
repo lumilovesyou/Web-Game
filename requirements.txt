@@ -1,0 +1,4 @@
+cffi==2.1.1
+pycparser==3.0
+raylib==6.0.1.0
+setuptools==84.0.0
