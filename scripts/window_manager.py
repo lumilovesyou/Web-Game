@@ -1,10 +1,12 @@
-from scripts.objects.window import Window
-from scripts.enums import WindowInteractionState
 from pyray import *
+
+from scripts.enums import WindowInteractionState
+from scripts.objects.window import Window
 
 WIS = WindowInteractionState()
 
-class WindowManager():
+
+class WindowManager:
     def __init__(self):
         self.windows = []
         self.interacted_window = None
@@ -12,12 +14,14 @@ class WindowManager():
         self.id = 0
         self.debug = True
 
-    def addWindow(self, position = (0,0), size = (100,100), colour = RED):
-        self.windows.append(Window(position[0], position[1], size[0], size[1], self.id, colour))
+    def addWindow(self, position=(0, 0), size=(100, 100), colour=RED):
+        self.windows.append(
+            Window(position[0], position[1], size[0], size[1], self.id, colour)
+        )
         self.id += 1
 
     def getWindowIndexById(self, id):
-        for i in range(0, len(self.windows)):
+        for i in range(len(self.windows)):
             if self.windows[i].id == id:
                 return i
 
@@ -25,36 +29,42 @@ class WindowManager():
     def drawWindows(self):
         set_mouse_cursor(MOUSE_CURSOR_DEFAULT)
         for i in self.windows:
-            x,y = i.x,i.y
+            x, y = i.x, i.y
             draw_rectangle(x, y, i.w, i.h, i.colour)
             self._manageMouseShapes(x, y, i.w, i.h, 8)
 
-    def _manageMouseShapes(self, x, y, w, h, g, gettingState = False): #x, y, height, width, gap
+    def _manageMouseShapes(
+        self, x, y, w, h, g, gettingState=False
+    ):  # x, y, height, width, gap
         cursor = get_mouse_position()
         cX = round(cursor.x)
         cY = round(cursor.y)
-        
+
         edges = []
 
-        #Could be modified to also return clicks on window edges
-        #Top
+        # Could be modified to also return clicks on window edges
+        # Top
         if cX in range(x, x + w) and cY in range(y, y + g):
             edges.append("top")
-        if (self.debug): draw_rectangle(x, y, w, g, RED) #Hitbox visualizer
-        #Bottom
+        if self.debug:
+            draw_rectangle(x, y, w, g, RED)  # Hitbox visualizer
+        # Bottom
         if cX in range(x, x + w) and cY in range(y + h - g, y + h):
             edges.append("bottom")
-        if (self.debug): draw_rectangle(x, y + h - g, w, g, RED) #Hitbox visualizer
-        #Left
+        if self.debug:
+            draw_rectangle(x, y + h - g, w, g, RED)  # Hitbox visualizer
+        # Left
         if cX in range(x, x + g) and cY in range(y, y + h):
             edges.append("left")
-        if (self.debug): draw_rectangle(x, y, g, h, ORANGE) #Hitbox visualizer
-        #Bottom left
+        if self.debug:
+            draw_rectangle(x, y, g, h, ORANGE)  # Hitbox visualizer
+        # Bottom left
         if cX in range(x + w - g, x + w) and cY in range(y, y + h):
             edges.append("right")
-        if (self.debug): draw_rectangle(x + w - g, y, g, h, ORANGE) #Hitbox visualizer
-        
-        #Match cases. Might be a cleaner way to do this tbh but I'm stupid so idk :shrug:
+        if self.debug:
+            draw_rectangle(x + w - g, y, g, h, ORANGE)  # Hitbox visualizer
+
+        # Match cases. Might be a cleaner way to do this tbh but I'm stupid so idk :shrug:
         if "top" in edges:
             if "left" in edges:
                 set_mouse_cursor(MOUSE_CURSOR_RESIZE_NWSE)
@@ -71,12 +81,13 @@ class WindowManager():
                 set_mouse_cursor(MOUSE_CURSOR_RESIZE_NS)
         elif "right" in edges or "left" in edges:
             set_mouse_cursor(MOUSE_CURSOR_RESIZE_EW)
-            
-        if gettingState: return len(edges) > 0 and edges != ["top"]
-            
+
+        if gettingState:
+            return len(edges) > 0 and edges != ["top"]
+
     def manageWindowInputs(self):
         cursor = get_mouse_position()
-        
+
         # Manages window moving
         if self.interacted_window != None:
             id = self.getWindowIndexById(self.interacted_window[0])
@@ -84,22 +95,27 @@ class WindowManager():
                 self.windows[id].x += int(cursor.x - self.interacted_window[1])
                 self.windows[id].y += int(cursor.y - self.interacted_window[2])
             elif self.window_state == WIS.RESIZING:
-                self.windows[id].w = max(50, self.windows[id].w + int(cursor.x - self.interacted_window[1]))
-                self.windows[id].h = max(50, self.windows[id].h + int(cursor.y - self.interacted_window[2]))
+                self.windows[id].w = max(
+                    50, self.windows[id].w + int(cursor.x - self.interacted_window[1])
+                )
+                self.windows[id].h = max(
+                    50, self.windows[id].h + int(cursor.y - self.interacted_window[2])
+                )
             self.interacted_window[1] = cursor.x
             self.interacted_window[2] = cursor.y
-                
-        
+
         # Detect mouse clicking a window, list is reversed to check top-down
         if is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
             for i in reversed(self.windows):
-                if (cursor.x > i.x and cursor.x < i.x + i.w) and (cursor.y > i.y and cursor.y < i.y + i.h):
+                if (cursor.x > i.x and cursor.x < i.x + i.w) and (
+                    cursor.y > i.y and cursor.y < i.y + i.h
+                ):
                     # Get the state of the grabbed window
                     if self._manageMouseShapes(i.x, i.y, i.w, i.h, 5, True):
                         self.window_state = WIS.RESIZING
                     else:
                         self.window_state = WIS.DRAGGING
-                    self.interacted_window = [i.id, cursor.x, cursor.y]            
+                    self.interacted_window = [i.id, cursor.x, cursor.y]
                     window = i
                     self.windows.remove(i)
                     self.windows.append(window)
