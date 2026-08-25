@@ -29,24 +29,44 @@ class WindowManager():
         cursor = get_mouse_position()
         cX = round(cursor.x)
         cY = round(cursor.y)
+        
+        edges = []
 
         #Could be modified to also return clicks on window edges
-        #Top left
-        if cX in range(x, x + g) and cY in range(y, y + g):
-            set_mouse_cursor(MOUSE_CURSOR_RESIZE_NWSE)
-        if (self.debug): draw_rectangle(x, y, g, g, RED) #Hitbox visualizer
-        #Bottom right
-        if cX in range(x + w - g, x + w) and cY in range(y + h - g, y + h):
-            set_mouse_cursor(MOUSE_CURSOR_RESIZE_NWSE)
-        if (self.debug): draw_rectangle(x + w - g, y + h - g, g, g, RED) #Hitbox visualizer
-        #Top right
-        if cX in range(x + w - g, x + w) and cY in range(y, y + g):
-            set_mouse_cursor(MOUSE_CURSOR_RESIZE_NESW)
-        if (self.debug): draw_rectangle(x + w - g, y, g, g, ORANGE) #Hitbox visualizer
+        #Top
+        if cX in range(x, x + w) and cY in range(y, y + g):
+            edges.append("top")
+        if (self.debug): draw_rectangle(x, y, w, g, RED) #Hitbox visualizer
+        #Bottom
+        if cX in range(x, x + w) and cY in range(y + h - g, y + h):
+            edges.append("bottom")
+        if (self.debug): draw_rectangle(x, y + h - g, w, g, RED) #Hitbox visualizer
+        #Left
+        if cX in range(x, x + g) and cY in range(y, y + h):
+            edges.append("left")
+        if (self.debug): draw_rectangle(x, y, g, h, ORANGE) #Hitbox visualizer
         #Bottom left
-        if cX in range(x, x + g) and cY in range(y + h - g, y + h):
-            set_mouse_cursor(MOUSE_CURSOR_RESIZE_NESW)
-        if (self.debug): draw_rectangle(x, y + h - g, g, g, ORANGE) #Hitbox visualizer
+        if cX in range(x + w - g, x + w) and cY in range(y, y + h):
+            edges.append("right")
+        if (self.debug): draw_rectangle(x + w - g, y, g, h, ORANGE) #Hitbox visualizer
+        
+        #Match cases. Might be a cleaner way to do this tbh but I'm stupid so idk :shrug:
+        if "top" in edges:
+            if "left" in edges:
+                set_mouse_cursor(MOUSE_CURSOR_RESIZE_NWSE)
+            elif "right" in edges:
+                set_mouse_cursor(MOUSE_CURSOR_RESIZE_NESW)
+            else:
+                set_mouse_cursor(MOUSE_CURSOR_RESIZE_ALL)
+        elif "bottom" in edges:
+            if "left" in edges:
+                set_mouse_cursor(MOUSE_CURSOR_RESIZE_NESW)
+            elif "right" in edges:
+                set_mouse_cursor(MOUSE_CURSOR_RESIZE_NWSE)
+            else:
+                set_mouse_cursor(MOUSE_CURSOR_RESIZE_NS)
+        elif "right" in edges or "left" in edges:
+            set_mouse_cursor(MOUSE_CURSOR_RESIZE_EW)
             
     def manageWindowInputs(self):
         cursor = get_mouse_position()
