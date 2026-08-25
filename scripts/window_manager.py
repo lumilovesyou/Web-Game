@@ -6,6 +6,7 @@ class WindowManager():
         self.windows = []
         self.dragged_window = None
         self.id = 0
+        self.debug = True
 
     def addWindow(self, position, size = (0,0), colour = RED):
         self.windows.append(Window(position[0], position[1], size, self.id, colour))
@@ -18,10 +19,34 @@ class WindowManager():
 
     # Draws windows, z-index is based on array position
     def drawWindows(self):
+        set_mouse_cursor(MOUSE_CURSOR_DEFAULT)
         for i in self.windows:
-            x = i.x
-            y = i.y
+            x,y = i.x,i.y
             draw_rectangle(x, y, i.size[0], i.size[1], i.colour)
+            self._manageMouseShapes(x, y, i.size[0], i.size[1], 8)
+
+    def _manageMouseShapes(self, x, y, w, h, g): #x, y, height, width, gap
+        cursor = get_mouse_position()
+        cX = round(cursor.x)
+        cY = round(cursor.y)
+
+        #Could be modified to also return clicks on window edges
+        #Top left
+        if cX in range(x, x + g) and cY in range(y, y + g):
+            set_mouse_cursor(MOUSE_CURSOR_RESIZE_NWSE)
+        if (self.debug): draw_rectangle(x, y, g, g, RED) #Hitbox visualizer
+        #Bottom right
+        if cX in range(x + w - g, x + w) and cY in range(y + h - g, y + h):
+            set_mouse_cursor(MOUSE_CURSOR_RESIZE_NWSE)
+        if (self.debug): draw_rectangle(x + w - g, y + h - g, g, g, RED) #Hitbox visualizer
+        #Top right
+        if cX in range(x + w - g, x + w) and cY in range(y, y + g):
+            set_mouse_cursor(MOUSE_CURSOR_RESIZE_NESW)
+        if (self.debug): draw_rectangle(x + w - g, y, g, g, ORANGE) #Hitbox visualizer
+        #Bottom left
+        if cX in range(x, x + g) and cY in range(y + h - g, y + h):
+            set_mouse_cursor(MOUSE_CURSOR_RESIZE_NESW)
+        if (self.debug): draw_rectangle(x, y + h - g, g, g, ORANGE) #Hitbox visualizer
             
     def manageWindowInputs(self):
         cursor = get_mouse_position()
