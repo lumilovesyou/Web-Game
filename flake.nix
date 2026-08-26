@@ -26,6 +26,7 @@
         packages = [
           pkgs.python3
           pkgs.ruff
+          pkgs.pyright
         ]
         ++ runtimeLibs;
         shellHook = ''

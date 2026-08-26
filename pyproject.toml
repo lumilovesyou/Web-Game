@@ -1,0 +1,4 @@
+[tool.pyright]
+reportUnknownVariableType = "none"
+reportUnknownMemberType = "none"
+reportUnknownArgumentType = "none"

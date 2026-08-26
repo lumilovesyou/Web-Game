@@ -1,5 +1,7 @@
-class WindowInteractionState:
-    def __init__(self):
-        self.NONE = 0
-        self.DRAGGING = 1
-        self.RESIZING = 2
+from enum import Enum
+
+
+class WindowInteractionState(Enum):
+    NONE = 0
+    DRAGGING = 1
+    RESIZING = 2
